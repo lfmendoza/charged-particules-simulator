@@ -19,7 +19,9 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "customize-cra": "^1.0.0"
+    "customize-cra": "^1.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2"
   },
   "scripts": {
     "start": "react-app-rewired --openssl-legacy-provider start",
@@ -29,6 +31,18 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "extends": [
